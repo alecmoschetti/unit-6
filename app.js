@@ -1,5 +1,5 @@
 // MAIN JAVASCRIPT PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-document.addEventListener('DOMContentLoaded', () => {
+   
     // GLOBAL VARIABLES ------------------------------------------------------
 
     const qwerty = document.getElementById('qwerty');
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // GLOBAL ARRAYS & OBJECTS ---------------------------------------------
 
-    const phrases = [
+    let phrases = [
         "Hydrogen",
         "Helium",
         "Lithium",
@@ -127,18 +127,35 @@ document.addEventListener('DOMContentLoaded', () => {
         "Moscovium",
         "Livermorium",
         "Tennessine",
-        "Oganesson"
-    ];
+        "Oganesson",
+    ]
 
 
     // GLOBAL FUNCTIONS --------------------------------------------------------
 
+    //function to create array with just letters
     function getRandomPhrasesAsArray(arr) {
-        let randomPhrase = arr.indexOf(Math.floor(Math.random() * 118) +1);
-        const getLetters = () => {
-            let randomLetters = [randomPhrase.split('')];
-            return randomLetters;
-        }
+        let randomPhrase = arr[(Math.floor(Math.random() * 118) +1)];
+        let randomLetters = randomPhrase.toString();
+        let finalLetters = Array.from(randomLetters);
+        return finalLetters;
+    }
+
+    const phraseArray = getRandomPhrasesAsArray(phrases); //for the addPhraseToDisplay function parameter
+    //function to put the letters on the screen
+    function addPhraseToDisplay(arr) {
+        let div = document.getElementById('phrase');
+        let ul = div.firstElementChild;
+        arr.forEach( (letter) => {
+            let li = document.createElement('li');
+            li.innerHTML = letter;
+            li.className = 'letter';
+            ul.appendChild(li);
+        });
+    }
+
+    function checkLetter(button) {
+        let classOfLetter = document.getElementsByClassName('letter');
     }
 
 
@@ -150,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'none';
     });
 
+    // CODE EXECUTION -------------------------------------------------------------
 
+    addPhraseToDisplay(phraseArray);
 
-//end of domcontent loaded event -----------------------------------------------    
-});
 
 
 
